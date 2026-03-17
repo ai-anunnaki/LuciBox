@@ -60,7 +60,7 @@ struct FileManagerContentView: View {
             .padding()
             
             // 文件列表
-            Table(filteredFiles, selection: $fileManager.selectedFile) {
+            Table(filteredFiles, selection: $fileManager.selectedFileID) {
                 TableColumn("名称") { item in
                     HStack {
                         Image(systemName: item.isDirectory ? "folder.fill" : "doc.fill")
@@ -96,7 +96,7 @@ struct FileManagerContentView: View {
                         .buttonStyle(.borderless)
                         
                         Button(action: {
-                            fileManager.selectedFile = item
+                            fileManager.selectedFileID = item.id
                             renameText = item.name
                             showingRenameAlert = true
                         }) {
@@ -105,7 +105,7 @@ struct FileManagerContentView: View {
                         .buttonStyle(.borderless)
                         
                         Button(action: {
-                            fileManager.selectedFile = item
+                            fileManager.selectedFileID = item.id
                             showingDeleteAlert = true
                         }) {
                             Image(systemName: "trash")

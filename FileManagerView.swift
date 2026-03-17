@@ -20,7 +20,8 @@ struct FileItem: Identifiable {
 class FileManager: ObservableObject {
     @Published var currentPath: URL
     @Published var files: [FileItem] = []
-    @Published var selectedFile: FileItem?
+    @Published var selectedFileID: UUID?
+    var selectedFile: FileItem? { files.first { $0.id == selectedFileID } }
     
     private let fileManager = Foundation.FileManager.default
     

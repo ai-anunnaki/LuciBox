@@ -105,7 +105,7 @@ class SystemMonitor: ObservableObject {
     }
     
     private func getDiskUsage() -> Double {
-        let fileManager = FileManager.default
+        let fileManager = Foundation.FileManager.default
         guard let path = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return 0
         }
