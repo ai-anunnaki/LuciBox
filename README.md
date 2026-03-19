@@ -1,4 +1,4 @@
-# 鸬鹚工具箱 LuciBox
+# Igigi工具箱 IgigiBox
 
 一个功能强大的 macOS 系统工具箱应用，提供进程管理、文件管理、剪贴板管理和系统监控功能。
 
@@ -56,8 +56,8 @@
 #### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/ai-anunnaki/LuciBox.git
-cd LuciBox
+git clone https://github.com/ai-anunnaki/IgigiBox.git
+cd IgigiBox
 ```
 
 #### 2. 使用 Xcode 打开项目
@@ -67,17 +67,17 @@ cd LuciBox
 # 打开 Xcode，选择 File > New > Project
 # 选择 macOS > App
 # 填写以下信息：
-#   - Product Name: LuciBox
+#   - Product Name: IgigiBox
 #   - Team: 选择你的开发团队（或选择 None）
 #   - Organization Identifier: com.anunnaki
-#   - Bundle Identifier: com.anunnaki.lucibox
+#   - Bundle Identifier: com.anunnaki.Igigibox
 #   - Interface: SwiftUI
 #   - Language: Swift
 #   - 取消勾选 Use Core Data
 #   - 取消勾选 Include Tests
 
 # 创建项目后，将以下文件添加到项目中：
-# - LuciBoxApp.swift（替换默认生成的）
+# - IgigiBoxApp.swift（替换默认生成的）
 # - ContentView.swift（替换默认生成的）
 # - ProcessManager.swift
 # - FileManagerView.swift
@@ -91,9 +91,9 @@ cd LuciBox
 
 在 Xcode 中：
 
-1. **选择项目** → **TARGETS** → **LuciBox**
+1. **选择项目** → **TARGETS** → **IgigiBox**
 2. **General** 标签页：
-   - Bundle Identifier: org.igigi.lucibox
+   - Bundle Identifier: org.igigi.Igigibox
    - Minimum Deployments: macOS 13.0
 3. **Signing & Capabilities** 标签页：
    - Team: 选择你的开发团队
@@ -107,7 +107,7 @@ cd LuciBox
 # 按 Cmd + R 或点击运行按钮
 
 # 方式 B：命令行构建
-xcodebuild -scheme LuciBox -configuration Debug
+xcodebuild -scheme IgigiBox -configuration Debug
 ```
 
 ### 方式二：使用命令行构建
@@ -120,8 +120,8 @@ cat > build.sh << 'EOF'
 #!/bin/bash
 
 # 设置变量
-APP_NAME="LuciBox"
-BUNDLE_ID="com.anunnaki.lucibox"
+APP_NAME="IgigiBox"
+BUNDLE_ID="com.anunnaki.Igigibox"
 BUILD_DIR="build"
 
 # 创建构建目录
@@ -143,7 +143,7 @@ swiftc -o "$APP_PATH/Contents/MacOS/$APP_NAME" \
     -framework SwiftUI \
     -framework AppKit \
     -framework Foundation \
-    LuciBoxApp.swift \
+    IgigiBoxApp.swift \
     ContentView.swift \
     ProcessManager.swift \
     FileManagerView.swift \
@@ -179,7 +179,7 @@ chmod +x build.sh
 cat > package.sh << 'EOF'
 #!/bin/bash
 
-APP_NAME="LuciBox"
+APP_NAME="IgigiBox"
 VERSION="1.0.0"
 BUILD_DIR="build"
 DIST_DIR="dist"
@@ -219,18 +219,18 @@ chmod +x package.sh
 # 手动创建 DMG
 # 1. 创建临时文件夹
 mkdir -p dmg_temp
-cp -R build/LuciBox.app dmg_temp/
+cp -R build/IgigiBox.app dmg_temp/
 
 # 2. 创建 DMG
-hdiutil create -volname "鸬鹚工具箱" \
+hdiutil create -volname "Igigi工具箱" \
     -srcfolder dmg_temp \
     -ov -format UDZO \
-    LuciBox-1.0.0.dmg
+    IgigiBox-1.0.0.dmg
 
 # 3. 清理
 rm -rf dmg_temp
 
-echo "DMG 创建完成: LuciBox-1.0.0.dmg"
+echo "DMG 创建完成: IgigiBox-1.0.0.dmg"
 ```
 
 ## 代码签名（可选）
@@ -244,11 +244,11 @@ security find-identity -v -p codesigning
 # 签名应用
 codesign --deep --force --verify --verbose \
     --sign "Developer ID Application: Your Name (TEAM_ID)" \
-    build/LuciBox.app
+    build/IgigiBox.app
 
 # 验证签名
-codesign --verify --verbose build/LuciBox.app
-spctl --assess --verbose build/LuciBox.app
+codesign --verify --verbose build/IgigiBox.app
+spctl --assess --verbose build/IgigiBox.app
 ```
 
 ## 公证（Notarization）
@@ -257,20 +257,20 @@ spctl --assess --verbose build/LuciBox.app
 
 ```bash
 # 1. 创建 ZIP 包
-ditto -c -k --keepParent build/LuciBox.app LuciBox.zip
+ditto -c -k --keepParent build/IgigiBox.app IgigiBox.zip
 
 # 2. 上传公证
-xcrun notarytool submit LuciBox.zip \
+xcrun notarytool submit IgigiBox.zip \
     --apple-id "your-apple-id@example.com" \
     --team-id "TEAM_ID" \
     --password "app-specific-password" \
     --wait
 
 # 3. 装订公证票据
-xcrun stapler staple build/LuciBox.app
+xcrun stapler staple build/IgigiBox.app
 
 # 4. 验证
-spctl --assess -vv --type install build/LuciBox.app
+spctl --assess -vv --type install build/IgigiBox.app
 ```
 
 ## 使用说明
@@ -347,7 +347,7 @@ spctl --assess -vv --type install build/LuciBox.app
 
 ```bash
 # 移除隔离属性
-xattr -cr /Applications/LuciBox.app
+xattr -cr /Applications/IgigiBox.app
 
 # 或允许任何来源的应用
 sudo spctl --master-disable
@@ -373,11 +373,11 @@ sudo spctl --master-disable
 ## 项目结构
 
 ```
-LuciBox/
+IgigiBox/
 ├── README.md                      # 本文件
 ├── BUILD.md                       # 构建说明（旧版）
 ├── Info.plist                     # 应用配置
-├── LuciBoxApp.swift              # 应用入口
+├── IgigiBoxApp.swift              # 应用入口
 ├── ContentView.swift             # 进程管理视图
 ├── ProcessManager.swift          # 进程管理逻辑
 ├── FileManagerView.swift         # 文件管理逻辑
@@ -411,10 +411,10 @@ Copyright (c) 2026 Igigi
 
 ## 联系方式
 
-- GitHub: https://github.com/ai-anunnaki/LuciBox
+- GitHub: https://github.com/ai-anunnaki/IgigiBox
 - Email: ai.anunnaki@proton.me
 - Domain: igigi.org
 
 ---
 
-**鸬鹚工具箱 LuciBox** - 让 macOS 管理更简单 🚀
+**Igigi工具箱 IgigiBox** - 让 macOS 管理更简单 🚀
